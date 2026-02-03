@@ -10,9 +10,9 @@ import importlib
 def import_module(module_name: str) -> list:
     try:
         module = importlib.import_module(module_name)
-        return "[OK]", "ready", module.__version__
+        return ["[OK]", "ready", module.__version__]
     except ImportError:
-        return "[MISSING]", "not installed", "N/A"
+        return ["[MISSING]", "not installed", "N/A"]
 
 
 def main():
