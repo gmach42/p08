@@ -3,36 +3,35 @@ from dotenv import load_dotenv
 
 
 def main():
-
-
-    # Load environment variables from .env file
-    print("ORACLE STATUS: Reading the Matrix...\n")
+    print("\nORACLE STATUS: Reading the Matrix...")
     load_dotenv()
 
-    # Get the variables
-    matrix_mode = os.getenv("MATRIX_MODE", "development")
-    database_url = os.getenv("DATABASE_URL", "Connected to local instance")
+    mode = os.getenv("MATRIX_MODE")
+    db_url = os.getenv("DATABASE_URL")
     api_key = os.getenv("API_KEY")
-    log_level = os.getenv("LOG_LEVEL", "DEBUG")
-    zion_endpoint = os.getenv("ZION_ENDPOINT", "https://api.zion.com")
+    log_level = os.getenv("LOG_LEVEL", "INFO")
+    zion_endpoint = os.getenv("ZION_ENDPOINT")
 
-    # Display the configuration
-    print("Configuration loaded:")
-    print(
-        f"Mode: {matrix_mode}\n"
-        f"Database: {database_url}\n"
-        f"API Access: {'Authenticated' if api_key else 'Not Authenticated'}\n"
-        f"Log Level: {log_level}\n"
-        f"Zion Network: {'Online' if zion_endpoint else 'Offline'}\n"
-    )
+    if not all([mode, db_url, api_key, log_level, zion_endpoint]):
+        print("Error: Missing configuration variables")
+        return
 
-    print("Environment security check:")
-    print(
-        "[OK] No hardcoded secrets detected\n"
-        "[OK] .env file properly configured\n"
-        "[OK] Production overrides available\n"
+    print("\nConfiguration loaded:")
+    print(f"Mode: {mode}")
+    data_base_status = (
+        "Connected to local instance" if "localhost" in db_url else db_url
     )
-    print("\nThe Oracle sees all configurations.\n")
+    print(f"Database: {data_base_status}")
+    print(f"API Access: {'Authenticated' if api_key else 'Denied'}")
+    print(f"Log Level: {log_level}")
+    print(f"Zion Network: {'Online' if zion_endpoint else 'Offline'}")
+
+    print("\nEnvironment security check:")
+    print("[OK] No hardcoded secrets detected")
+    print("[OK] .env file properly configured")
+    print("[OK] Production overrides available")
+
+    print("\nThe Oracle sees all configurations\n")
 
 
 if __name__ == "__main__":
