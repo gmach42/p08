@@ -3,7 +3,7 @@ import os
 import site
 
 
-def main():
+def main() -> None:
     # Check if we're outside the Matrix or not
     matrix_status = (
         "You're still in the real world..."
@@ -27,10 +27,13 @@ def main():
         print(f"Environment path: {virtual_env_path}")
         print("\nSUCCESS: You're in an isolated environment!")
         print(
-            "Safe to install packages without affectiong the global system.\n"
+            "Safe to install packages without affecting the global system.\n"
         )
         print("Package installation path: ")
-        print(site.getusersitepackages(), "\n")
+        try:
+            print(site.getsitepackages()[0], "\n")
+        except (AttributeError, IndexError) as e:
+            print(f"Error detecting package installation path: {e}\n")
 
     # You are still in the real world
     else:
