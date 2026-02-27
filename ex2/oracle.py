@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 
 def main():
 
-
     # Load environment variables from .env file
     print("ORACLE STATUS: Reading the Matrix...\n")
     load_dotenv()
