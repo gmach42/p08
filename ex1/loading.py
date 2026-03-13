@@ -46,8 +46,8 @@ def main() -> None:
     if missing_modules:
         print("\nERROR: Missing dependencies: "
               f"{', '.join(missing_modules)}")
-        print("Use poetry install or pip install -r requirements.txt")
-        print("Exiting program...")
+        print("Use poetry install or pip install -r requirements.txt\n")
+        print("Exiting program...\n")
         sys.exit(1)
 
     print("\nAnalyzing Matrix films...")
